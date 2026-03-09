@@ -136,7 +136,7 @@ for i, attack in enumerate(attacks):
     log_to_file("jailbreak_attempts_log_manual_grade.txt", log_block)
 
     print(f"Result: {result}")
-    print(f"Response: {answer[:150]}...")
+    print(f"Response: {answer[:300]}...")
     print()
 
 # --- Summary ---
