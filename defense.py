@@ -74,7 +74,7 @@ def is_blocked(reply: str) -> bool:
 ## Helper function for logging results
 def log_to_file(filename: str, block: str):
     with open(filename, "a", encoding="utf-8") as fh:
-        fh.write(block + "\n")         \
+        fh.write(block + "\n")
 
 # --- TEST 1: Attack WITHOUT defense (no system prompt) ---
 input("TEST 1: Attack WITHOUT defense, press ENTER...")
@@ -128,6 +128,7 @@ for i, attack in enumerate(attacks):
     f"--- Attack {i+1} of {len(attacks)} ---\n"
     f"Attack: {attack}\n"
     f"Result: {result}\n"
+    ##logs 200 chars of the LLMs response
     f"Response snippet: {answer[:200]}\n"
     f"Timestamp: {datetime.datetime.utcnow().isoformat()}Z\n"
     f"{'-'*50}")
