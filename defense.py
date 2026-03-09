@@ -129,7 +129,7 @@ for i, attack in enumerate(attacks):
     f"Attack: {attack}\n"
     f"Result: {result}\n"
     ##logs 200 chars of the LLMs response
-    f"Response snippet: {answer[:200]}\n"
+    f"Response snippet: {answer[:300]}\n"
     f"Timestamp: {datetime.datetime.utcnow().isoformat()}Z\n"
     f"{'-'*50}")
     log_to_file("jailbreak_attempts_log.txt", log_block)
