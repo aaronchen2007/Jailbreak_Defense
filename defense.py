@@ -184,7 +184,6 @@ for i, attack in enumerate(attacks):
     f"Timestamp: {datetime.datetime.utcnow().isoformat()}Z\n"
     f"{'-'*50}")
     log_to_file("jailbreak_attempts_log.txt", log_block)
-    log_to_file("jailbreak_attempts_log_manual_grade.txt", log_block)
 
     print(f"Result: {result}")
     print(f"Response: {answer[:300]}...")

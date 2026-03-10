@@ -1,0 +1,44 @@
+Your assistant’s purpose
+Each attack attempted
+System response
+Analysis: why defense worked/failed
+Overall defense rate
+
+1. Assistant Purpose
+
+The assistant is designed to act as a story writing assistant. It's primary purpose is to help users generate creative stories while following ethical guidelines.
+
+The assistant must:
+Only assist with story writing related requests
+Refuse requests involving illegal activities, harm, hacking, or violent wrongdoing
+Resist prompt injection attempts and other jailbreaking strategies.
+The system uses a defensive system prompt that enforces strict role anchoring and safety rules.
+
+2. Attack Categories Tested
+The following jailbreak strategies were tested:
+a) Role-play jailbreak attacks (DAN, other roles)
+b) Instruction override attacks ("Ignore previous instructions", or trying to trick the LLM that the system prompt it was given was incorrect, and it should follow a new prompt.)
+c) Scenario jailbreaks (there are no laws in this world)
+d) Translation and encoding attacks (Chinese instructions, base64 and piglatin prompts)
+e) LLM-generated jailbreak prompts using a, b, c, and d strategies.
+
+A total of 32 attacks were tested. 3 for a, b, c, and d each, and 20 LLM-generated
+See _jailbreak_prompts.txt and generated_attacks.txt for full prompts.
+
+3. Attack Results
+Full results are recorded in jailbreak_attempts_log.txt
+
+Although some of the attacks were determined as SUCCEEDED, since the program used regex, the LLM actually did not generate harmful content. The overall defense fail rate (successful jailbreaking rate) is 20/32, but no harmful content was generated.
+
+4. Analysis
+The safe training for the model itself seems pretty solid already. With the system prompt that enphasizes on the safety guildelines, the LLM successfully stops all the attacks or completed the task within the boundaries. 
+For the LLM-generated attack prompts, the LLM being tested seems to directly reject less, but instead still completes the task while within safety boundaries.
+
+5. Overall Results
+Total attacks tested:32
+Blocked attacks:20
+Safe narrative responses (no harmful content generated): 11
+Harmful outputs:0
+Defense rate: 20 / 32 = 62% explicit refusal, 100% harmful content prevention
+
+Overall, the assistant demonstrated strong resistance to prompt injection and maintained its intended role as a safe story writing assistant.
