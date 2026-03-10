@@ -26,7 +26,10 @@ print(f"Defense system prompt:\n{defense_prompt}\n")
 def generate_llm_attacks(number_prompts, strategy, model="local"):
     print(f"Generating {strategy} jailbreak attacks...\n")
     with open("_attacker_LLM_prompt.txt") as f:
-        attack_prompt = f.read()
+        attack_prompt_template = f.read()
+    
+    attack_prompt = attack_prompt_template.format(strategy=strategy)
+
     generated = []
     count = 0
     while count < number_prompts:
