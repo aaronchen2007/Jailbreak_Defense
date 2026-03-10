@@ -23,12 +23,13 @@ print(f"Defense system prompt:\n{defense_prompt}\n")
 
 # --- Helper functions --- #
 ## Helper function for using llm to generate jailbreaking prompts
-def generate_llm_attacks(number_prompts,model="local"):
+def generate_llm_attacks(number_prompts, model="local"):
     print("Generating LLM-based jailbreak attacks...\n")
-    with open("_attacker_LLM_prompt.txt"):
+    with open("_attacker_LLM_prompt.txt") as f:
         attack_prompt = f.read()
-    number_prompts = 0
-    while number_prompts < 10:
+    generated = []
+    count = 0
+    while count < number_prompts:
         response = client.chat.completions.create(
             model=model,
             messages=[
@@ -38,9 +39,15 @@ def generate_llm_attacks(number_prompts,model="local"):
             temperature=0.9,
             max_tokens=500,
         )
-        generated = []
-        generated.append(response.choices[0].message.content)
-        number_prompts+= 1
+        text = response.choices[0].message.content
+        ### Split multi-line output (if the output is multiline)
+        for line in text.split("\n"):
+            line = line.strip("- ").strip()
+            if line:
+                generated.append(line)
+                count += 1
+                if count >= number_prompts:
+                    break
     return generated
 
 
@@ -98,7 +105,7 @@ def log_to_file(filename: str, block: str):
         fh.write(block + "\n")
 
 # --- Generated attacker prompts using LLM --- #
-llm_generated_attacks = generate_llm_attacks(5)
+llm_generated_attacks = generate_llm_attacks(number_prompts=5)
 
 print(f"Generated {len(llm_generated_attacks)} attacks\n")
 
